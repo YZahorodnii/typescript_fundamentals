@@ -2,27 +2,25 @@
 //     Зверніть увагу там де масиви... в них може бути багато однотипних обїектів
 //
 
+interface ICore{
+    payload_type: string;
+    payload_mass_kg: number;
+    payload_mass_lbs: number;
+}
+interface IArray{
+    flight: number;
+    core: {
+        reuse_count: number;
+        status: boolean;
+    }
+}
 interface IRocket{
     rocket_name: string;
     first_stage: {
-        cores: [
-            {
-                flight: number;
-                core: {
-                    reuse_count: number;
-                    status: boolean;
-                }
-            }
-        ]
+        cores: IArray[]
     },
     second_stage: {
-        payloads: [
-            {
-                payload_type: string;
-                payload_mass_kg: number;
-                payload_mass_lbs: number;
-            }
-        ]
+        payloads: ICore[]
     }
 }
 interface newObject{
@@ -41,7 +39,13 @@ interface newObject{
 // ---------------------------------------------------------------------------—————————
 // 2) протипізувати функції:
 //
-    const user = {
+interface IntUser{
+    name:string,
+    age:number,
+    gender:string
+}
+
+    const user: IntUser = {
         name:'Max',
         age:18,
         gender:'male'
@@ -54,7 +58,7 @@ function showSum(a:number,b:number):void{
     console.log(a + b);
 }
 
-function incAge(someUser, inc:number){
+function incAge(someUser, inc:number):IntUser{
     someUser.age+=inc
     return someUser
 }
